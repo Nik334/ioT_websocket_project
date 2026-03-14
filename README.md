@@ -41,7 +41,7 @@ pip install -r requirements.txt
 ### 4. Configure Environment
 Create `.env` file (optional, defaults work for local development):
 ```env
-MONGODB_URL=mongodb://localhost:27017
+MONGODB_URL=mongodb+srv://nikkumar334:hello@ans.y96vfkl.mongodb.net/
 DATABASE_NAME=iot_streaming_db
 JWT_SECRET_KEY=your-secret-key
 JWT_ALGORITHM=HS256

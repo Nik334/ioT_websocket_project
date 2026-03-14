@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: iot-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INIT_DB_DATABASE: iot_streaming_db
+
+  fastapi:
+    build: .
+    container_name: iot-fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=iot_streaming_db
+      - JWT_SECRET_KEY=your-super-secret-key-change-in-production
+      - JWT_ALGORITHM=HS256
+      - JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=password
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:
